@@ -10,7 +10,7 @@ import CardTextFieldScreen from './scenes/CardTextFieldScreen'
 import testID from './utils/testID'
 
 stripe.init({
-  publishableKey: 'pk_test_bRwMbhpXDzOb2DATdYR25WS5',
+  publishableKey: '<publishableKey>',
   merchantId: '<MERCHANT_ID>',
 })
 
