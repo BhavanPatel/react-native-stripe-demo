@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import Root from './src/Root';
+import StripeHome from './src';
 
-AppRegistry.registerComponent('stripeDemo', () => Root);
+AppRegistry.registerComponent('stripeDemo', () => StripeHome);

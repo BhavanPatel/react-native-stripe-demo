@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import stripe from 'tipsi-stripe'
-import Button from '../components/Button'
-import testID from '../utils/testID'
+import Button from './stripe_component/components/Button'
+import testID from './stripe_component/utils/testID'
 
-export default class CardFormScreen extends Component {
+stripe.init({
+  publishableKey: 'pk_test_bRwMbhpXDzOb2DATdYR25WS5',
+  merchantId: '<MERCHANT_ID>',
+})
+
+export default class StripeHome extends Component {
   state = {
     loading: false,
     token: null,
@@ -25,6 +30,10 @@ export default class CardFormScreen extends Component {
         loading: false,
         token,
       })
+      if(this.state.token.tokenId){
+        alert('Success'); 
+      }
+      // alert(JSON.stringify(this.state.token));
     } catch (error) {
       console.log('Error:', error) // eslint-disable-line no-console
       this.setState({
@@ -39,26 +48,14 @@ export default class CardFormScreen extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.header}>
-          Card Form Example
-        </Text>
-        <Text style={styles.instruction}>
-          Click button to show Card Form dialog.
+          Stripe Example
         </Text>
         <Button
-          text="Enter you card and pay"
+          text="Purchase Order"
           loading={loading}
           onPress={this.handleCardPayPress}
           {...testID('cardFormButton')}
         />
-        <View
-          style={styles.token}
-          {...testID('cardFormToken')}>
-          {token &&
-            <Text style={styles.instruction}>
-              Token: {token.tokenId}
-            </Text>
-          }
-        </View>
       </View>
     )
   }
@@ -75,13 +72,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },
-  instruction: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  token: {
-    height: 20,
   },
 })
